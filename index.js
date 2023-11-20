@@ -133,11 +133,14 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
         },
         async (error, result) => {
           if (error) {
-            throw error;
+            console.log(error)
+            return res
+            .status(401)
+            .json({ error: true, message: "an unexpected error occured" });
           }
-
+console.log(1)
           const user = await User.findOne({ username: username });
-
+          console.log(2)
           if (!user)
             return res
               .status(401)
@@ -153,10 +156,11 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
               message: "voice_not_registered",
               userId: user._id,
             });
-
+         
           let verificationResult;
           try {
             //Perform voice verification logic (replace with your own logic)
+            
             verificationResult = await performVoiceVerification(
               voiceUrl,
               userVoice
@@ -164,7 +168,7 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
           } catch (err) {
             return res.status(500).json({ error: "Internal Server Error" });
           }
-
+      
           if (verificationResult.sucess) {
             // Generate JWT token
             const token = jwt.sign({ userId: user._id }, "your-secret-key");
