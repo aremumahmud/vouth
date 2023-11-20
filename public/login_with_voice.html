@@ -113,6 +113,8 @@
         </p>
       </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const voiceForm = document.getElementById("form");
@@ -141,7 +143,7 @@
               mediaRecorder.onstop = () => {
                 const blob = new Blob(chunks, { type: "audio/wav" });
                 const audioUrl = URL.createObjectURL(blob);
-                console.log(audioUrl);
+                //alert(audioUrl);
                 // Create an audio element to preview the recordin
 
                 // Append the audio element to the list
@@ -182,13 +184,12 @@
             "voice2.wav"
           );
 
+          //alert(formData.getAll('voice'))
+
           // console.log(new URLSearchParams(formData).toString());
           // Use fetch API to send form data to the server
-          fetch("/verify-voice", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
+          axios.post("/verify-voice",  formData)
+            .then((response) => response.data)
             .then((data) => {
               if (data.error) {
                 if (data.message == "voice_not_registered") {
@@ -207,7 +208,7 @@
             })
             .catch(
               (error) =>
-                (document.getElementById("error").innerHTML = error.message)
+                (document.getElementById("error").innerHTML = error.response.data.message)
             );
         });
       });
