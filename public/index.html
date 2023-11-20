@@ -146,6 +146,7 @@
       let password = $("password").value;
       try {
         let data = await registerUser(username, password);
+         $("submit").innerHTML = 'Sign up'
         if (data.error) {
           $("error").innerHTML = data.message;
           return;
@@ -153,6 +154,8 @@
         localStorage.setItem("UserID", data.id);
         window.open("/reg_voice.html", "_self");
       } catch (err) {
+        $("submit").innerHTML = 'Sign up'
+        $("error").innerHTML = err.message;
         console.log(err);
       }
     });
