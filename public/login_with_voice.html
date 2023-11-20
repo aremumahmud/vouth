@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice Registration Form</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css"
+      integrity="sha512-P9vJUXK+LyvAzj8otTOKzdfF1F3UYVl13+F8Fof8/2QNb8Twd6Vb+VD52I7+87tex9UXxnzPgWA3rH96RExA7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css"
+      integrity="sha512-sVSECYdnRMezwuq5uAjKQJEcu2wybeAPjU4VJQ9pCRcCY4pIpIw4YMHIOQ0CypfwHRvdSPbH++dA3O4Hihm/LQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/regular.min.css"
+      integrity="sha512-d2x1oQUT6HACW9UlXxWI6XrIBDrEE5z2tit/+kWEdXdVYuift7sm+Q6ucfGWQr1F0+GD9/6eYoYDegw2nm05Vw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css"
+      integrity="sha512-tk4nGrLxft4l30r9ETuejLU0a3d7LwMzj0eXjzc16JQj+5U1IeVoCuGLObRDc3+eQMUcEQY1RIDPGvuA7SNQ2w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/svg-with-js.min.css"
+      integrity="sha512-T+W8aCLi/CrpBhX5eX42Kw0/oGb/cxhQHYsQDIXx7UgK8c0A4CWw+TOQIqNJms1AZHI+6eKE4U1GubeLrguNww=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <form
+      id="form"
+      class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          class="mx-auto h-10 w-auto"
+          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+          alt="Your Company" />
+        <h2
+          class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Sign in with Your Voice
+        </h2>
+      </div>
+
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <p id="error" class="text-sm font-medium text-red-600"></p>
+        <div>
+          <label
+            htmlFor="email"
+            class="block text-sm font-medium leading-6 text-gray-900">
+            Username
+          </label>
+          <div class="mt-2">
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="email"
+              required
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+          </div>
+        </div>
+
+        <div class="p-3">
+          <p>Kindly take a moment to speak for 5 seconds to help us verify your voice.</p>
+        </div>
+        <div class="flex justify-between items-center border rounded-xl p-5">
+          <div>
+            <i class="fas fa-microphone"></i>
+          </div>
+          <div>
+            <p id="record_text" class="flex">Click play to start recording</p>
+          </div>
+          <div>
+            <i id="startRecording" class="fas fa-play"></i>
+            <i
+              id="stopRecording"
+              style="display: none"
+              class="fas fa-pause"></i>
+          </div>
+        </div>
+        <br />
+        <div>
+          <button
+            type="submit"
+            class="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gay-600">
+            Sign in
+          </button>
+        </div>
+        <p class="mt-10 text-center text-sm text-gray-500">
+          Not a member?{' '}
+          <a
+            href="/"
+            class="font-semibold leading-6 text-gray-600 hover:text-indigo-500">
+            Sign up with us here
+          </a>
+        </p>
+      </div>
+    </form>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const voiceForm = document.getElementById("form");
+        const userIdInput = document.getElementById("userId");
+        //  const recordingsList = document.getElementById('recordingsList');
+        const startRecordingButton = document.getElementById("startRecording");
+        const stopRecordingButton = document.getElementById("stopRecording");
+        const submitFormButton = document.getElementById("submitForm");
+
+        let mediaRecorder;
+        let chunks = [];
+
+        // Start recording when the button is clicked
+        startRecordingButton.addEventListener("click", () => {
+          navigator.mediaDevices
+            .getUserMedia({ audio: true })
+            .then((stream) => {
+              mediaRecorder = new MediaRecorder(stream);
+
+              mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) {
+                  chunks.push(e.data);
+                }
+              };
+
+              mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: "audio/wav" });
+                const audioUrl = URL.createObjectURL(blob);
+                console.log(audioUrl);
+                // Create an audio element to preview the recordin
+
+                // Append the audio element to the list
+                // recordingsList.appendChild(audio);
+
+                // Enable form submission
+                // submitFormButton.disabled = false;
+              };
+
+              mediaRecorder.start();
+              startRecordingButton.style.display = "none";
+              stopRecordingButton.style.display = "block";
+              document.getElementById("record_text").innerHTML =
+                "Click pause to stop recording";
+            })
+            .catch((err) => console.error("Error accessing microphone:", err));
+        });
+
+        // Stop recording when the button is clicked
+        stopRecordingButton.addEventListener("click", () => {
+          mediaRecorder.stop();
+          startRecordingButton.style.display = "block";
+          stopRecordingButton.style.display = "none";
+          document.getElementById("record_text").innerHTML =
+            "Click play to start recording";
+        });
+
+        // Update the userId in the form before submitting
+        voiceForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // Create FormData object and append the audio blob
+          // Replace with your actual user ID
+          const formData = new FormData(voiceForm);
+          formData.append(
+            "voice",
+            new Blob(chunks, { type: "audio/wav" }),
+            "voice2.wav"
+          );
+
+          // console.log(new URLSearchParams(formData).toString());
+          // Use fetch API to send form data to the server
+          fetch("/verify-voice", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.error) {
+                if (data.message == "voice_not_registered") {
+                  localStorage.setItem("UserID", data.userId);
+                  let anchor = `Voice not registered yet! click <a class="text-indigo-600" href="/reg_voice.html">here</a> to register`;
+                  document.getElementById("error").innerHTML = anchor;
+                  return;
+                }
+                document.getElementById("error").innerHTML = data.message;
+                return;
+              }
+              document.getElementById("error").innerHTML = "";
+              localStorage.removeItem("UserID");
+              localStorage.setItem("userToken", data.token);
+              window.open("/dash.html", "_self");
+            })
+            .catch(
+              (error) =>
+                (document.getElementById("error").innerHTML = error.message)
+            );
+        });
+      });
+    </script>
+  </body>
+</html>
