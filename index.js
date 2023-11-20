@@ -50,6 +50,10 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
+  const user = await User.findOne({ username: username });
+
+  if(user) return res.status(401).json({ error: true, message: "username exists! please sign in instead if own this account" });
+ 
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
 
