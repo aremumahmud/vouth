@@ -6,10 +6,19 @@
   <title>Document</title>
 </head>
 <body>
-  <form action="http://localhost:4000/register-voice" method="post">
-<input type="text" name="userId">
-<input type="file" name="voice" id="">
-<button>submit</button>
-  </form>
+ <div id="wavef>orm"></div>
+
 </body>
+
+<script src="https://unpkg.com/wavesurfer.js@7.4.6/dist/wavesurfer.js"></script>
+<script>
+var wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: 'pink',
+    progressColor: 'lightgreen'
+});
+
+wavesurfer.load('https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3');
+
+</script>
 </html>
