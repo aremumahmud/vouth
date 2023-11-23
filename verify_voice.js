@@ -63,7 +63,12 @@ async function performVoiceVerification(voice1, voice2) {
       sucess: false,
     };
   } catch (error) {
-    console.error(error);
+   // console.log(error)
+    return {
+      message: "Voice Authorization failed, Please try again",
+      error: true,
+      sucess: false,
+    };
   }
 }
 

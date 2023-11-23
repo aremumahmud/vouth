@@ -273,9 +273,7 @@
               mediaRecorder.onstop = () => {
                 const blob = new Blob(chunks, { type: "audio/wav" });
                 $("submit").click();
-                transcribeAudioBlob(blob)
-                  .then((res) => console.log(res))
-                  .catch((err) => console.log(err));
+      
                 const audioUrl = URL.createObjectURL(blob);
                 //alert(audioUrl);
                 if (mediaStream) {
