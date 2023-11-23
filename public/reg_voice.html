@@ -183,8 +183,8 @@
         <div class="p-3">
           <p id="error" class="text-sm font-medium text-red-600"></p>
           <p>
-            Kindly take a moment to speak for 5 seconds to help us verify your
-            voice.
+            Kindly take a moment to say the following key phrase that pops up to
+            help us verify your voice.
           </p>
         </div>
         <div
@@ -228,10 +228,15 @@
         </p>
       </div>
     </form>
-    <script src="/js/isLoudEnough.js"></script>
-    <script>
-      let $ = (id) => document.getElementById(id);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
 
+   
+    <script src="/js/similarity.js"></script>
+    <script>
+      let key_phrase = "serenading stars shine silently in the serene sky";
+      let $ = (id) => document.getElementById(id);
+      let transcript = "";
       let userID = localStorage.getItem("UserID");
       if (!userID) {
         alert("you have to create an account to access this page");
@@ -268,25 +273,32 @@
                 const blob = new Blob(chunks, { type: "audio/wav" });
                 const audioUrl = URL.createObjectURL(blob);
                 console.log(audioUrl);
-
+                // transcribe(chunks)
+                // .then((response) => {
+                // console.log(response.data);
+                //})
+                //.catch((error) => {
+                //console.error(error.response.data);
+                //});
                 if (mediaStream) {
                   mediaStream.getTracks().forEach((track) => track.stop());
                   mediaStream = null;
                 }
 
-                const threshold = 0.015; // Adjust this value according to your needs
+               // const threshold = 0.015; // Adjust this value according to your needs
 
-                isAudioLoudEnough(blob, threshold).then((result) => {
-                  if (result) {
-                    return $("submit").click();
-                  }
+                let result = areSentencesAlmostSame(key_phrase, transcript);
+                if (result) {
+                  //console.log(result);
+                   document.getElementById("error").innerHTML =''
+                  return $("submit").click();
+                }
 
-                  document.getElementById("error").innerHTML =
-                    "Voice is not loud enough, Please try again";
-                  startRecordingButton.style.display = "flex";
+                document.getElementById("error").innerHTML =
+                  "Your provided phrase ('["+transcript+"]') doesn't match the expected key phrase. Please double-check and try again.";
+                startRecordingButton.style.display = "flex";
 
-                  $("submit").style.display = "none";
-                });
+                $("submit").style.display = "none";
 
                 //  $("submit").click();
                 // Create an audio element to preview the recordin
@@ -299,14 +311,21 @@
               };
 
               mediaRecorder.start();
-
+              window.SpeechRecognition = window.webkitSpeechRecognition;
+              let recognition = new SpeechRecognition();
+              recognition.interimResults = true;
+              recognition.addEventListener("result", (r) => {
+                transcript = r.results[0][0].transcript;
+                //console.log(r);
+              });
+              recognition.start();
               $("modal").style.display = "flex";
               setTimeout(() => {
                 stopRecordingButton.click();
                 startRecordingButton.style.display = "none";
                 $("modal").style.display = "none";
                 $("submit").style.display = "flex";
-              }, 6000);
+              }, 7000);
             })
             .catch(
               (err) =>

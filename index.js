@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const performVoiceVerification = require("./verify_voice");
-const path = require("path")
+const path = require("path");
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ const parser = multer({ storage: storage });
 const app = express();
 const port = process.env.port || 4000;
 
-app.use(express.static(path.join(__dirname , "/public")))
+app.use(express.static(path.join(__dirname, "/public")));
 
 const uri = process.env.MONGOOSE_URI || "mongodb://127.0.0.1:27017/testdb101";
 // Connect to MongoDB
@@ -52,8 +52,15 @@ app.post("/signup", async (req, res) => {
 
   const user = await User.findOne({ username: username });
 
-  if(user) return res.status(401).json({ error: true, message: "username exists! please sign in instead if own this account" });
- 
+  if (user)
+    return res
+      .status(401)
+      .json({
+        error: true,
+        message:
+          "username exists! please sign in instead if you own this account",
+      });
+
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -137,14 +144,14 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
         },
         async (error, result) => {
           if (error) {
-            console.log(error)
+            console.log(error);
             return res
-            .status(401)
-            .json({ error: true, message: "an unexpected error occured" });
+              .status(401)
+              .json({ error: true, message: "an unexpected error occured" });
           }
-console.log(1)
+
           const user = await User.findOne({ username: username });
-          console.log(2)
+
           if (!user)
             return res
               .status(401)
@@ -160,19 +167,29 @@ console.log(1)
               message: "voice_not_registered",
               userId: user._id,
             });
-         
+
           let verificationResult;
           try {
             //Perform voice verification logic (replace with your own logic)
-            
+
             verificationResult = await performVoiceVerification(
               voiceUrl,
               userVoice
             );
           } catch (err) {
-            return res.status(500).json({ error: "Internal Server Error" });
+            return res.status(500).json({
+              sucess: false,
+              error: true,
+              message: "Internal Server Error",
+            });
           }
-      
+          if (!verificationResult) {
+            return res.status(500).json({
+              sucess: false,
+              error: true,
+              message: "Internal Server Error",
+            });
+          }
           if (verificationResult.sucess) {
             // Generate JWT token
             const token = jwt.sign({ userId: user._id }, "your-secret-key");
@@ -184,8 +201,12 @@ console.log(1)
       )
       .end(req.file.buffer);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // console.error(error);
+    res.status(500).json({
+      sucess: false,
+      error: true,
+      message: "Internal Server Error",
+    });
   }
 });
 

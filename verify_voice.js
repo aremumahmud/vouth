@@ -63,7 +63,7 @@ async function performVoiceVerification(voice1, voice2) {
       sucess: false,
     };
   } catch (error) {
-    console.error(error);
+    //console.error(error);
   }
 }
 
