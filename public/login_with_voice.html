@@ -275,8 +275,6 @@
 
               mediaRecorder.onstop = () => {
                 const blob = new Blob(chunks, { type: "audio/wav" });
-                
-
                 const audioUrl = URL.createObjectURL(blob);
                 //alert(audioUrl);
                 if (mediaStream) {
