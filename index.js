@@ -30,7 +30,9 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const uri = process.env.MONGOOSE_URI || "mongodb://127.0.0.1:27017/testdb101";
 // Connect to MongoDB
-mongoose.connect(uri);
+mongoose.connect(uri).then(() => {
+  console.log("connected");
+});
 
 // Define User schema and model
 const userSchema = new mongoose.Schema({
@@ -53,13 +55,11 @@ app.post("/signup", async (req, res) => {
   const user = await User.findOne({ username: username });
 
   if (user)
-    return res
-      .status(401)
-      .json({
-        error: true,
-        message:
-          "username exists! please sign in instead if you own this account",
-      });
+    return res.status(401).json({
+      error: true,
+      message:
+        "username exists! please sign in instead if you own this account",
+    });
 
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -113,7 +113,28 @@ app.post("/register-voice", parser.single("voice"), async (req, res) => {
             throw error;
           }
 
-          let user = await User.findById(userId);
+          let user;
+          try {
+            user = await User.findById(userId);
+          } catch (e) {
+           user = null
+          }
+
+        // console.log(user , result)
+
+          if (!user) {
+           console.log(user)
+            return res
+              .status(401)
+              .json({
+                error: true,
+                sucess: false,
+                message:
+                  "User not Found, You have to register first to register a voice",
+              });
+          }
+
+           console.log(user)
           user.voice = result.secure_url;
           user = await user.save();
 
@@ -122,7 +143,7 @@ app.post("/register-voice", parser.single("voice"), async (req, res) => {
       )
       .end(req.file.buffer);
   } catch (error) {
-    console.error(error);
+    //console.log(error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -177,7 +198,7 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
               userVoice
             );
           } catch (err) {
-          console.log(err,11)
+            console.log(err, 11);
             return res.status(500).json({
               sucess: false,
               error: true,
@@ -202,7 +223,7 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
       )
       .end(req.file.buffer);
   } catch (error) {
-  console.log(error,1)
+    console.log(error, 1);
     // console.error(error);
     res.status(500).json({
       sucess: false,

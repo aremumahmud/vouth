@@ -152,7 +152,7 @@
       <div class="boxen animate__animated animate__heartBeat">
         <p>
           Say the following key phrase:
-          <b>Serenading stars shine silently in the serene sky</b>
+          <b>Whispering winds, dancing leaves, under the moonlit eaves</b>
         </p>
         <div class="boxContainer">
           <div class="box box1"></div>
@@ -221,7 +221,7 @@
         <p class="mt-10 text-center text-sm text-gray-500">
           Already a member?
           <a
-            href="/login.html"
+            href="/login_with_voice.html"
             class="font-semibold leading-6 text-gray-600 hover:text-indigo-500">
             Login to your account here
           </a>
@@ -236,7 +236,7 @@
     <script src="/js/similarity.js"></script>
     <script>
       let isMobile = isMobileBrowser();
-      let key_phrase = "serenading stars shine silently in the serene sky";
+      let key_phrase = "Whispering winds, dancing leaves, under the moonlit eaves";
       let $ = (id) => document.getElementById(id);
       let transcript = "";
       let userID = localStorage.getItem("UserID");
@@ -288,21 +288,24 @@
                 }
 
                 // const threshold = 0.015; // Adjust this value according to your needs
+                if (!isMobile) {
+                  let result = areSentencesAlmostSame(key_phrase, transcript);
+                  if (result) {
+                    //console.log(result);
+                    startRecordingButton.style.display = "none";
+                    $("submit").style.display = "flex";
+                    document.getElementById("error").innerHTML = "";
+                    return $("submit").click();
+                  }
 
-                let result = areSentencesAlmostSame(key_phrase, transcript);
-                if (result) {
-                  //console.log(result);
-                  document.getElementById("error").innerHTML = "";
-                  return $("submit").click();
+                  document.getElementById("error").innerHTML =
+                    "Your provided phrase ('[" +
+                    transcript +
+                    "]') doesn't match the expected key phrase. Please double-check and try again.";
+                  startRecordingButton.style.display = "flex";
+
+                  $("submit").style.display = "none";
                 }
-
-                document.getElementById("error").innerHTML =
-                  "Your provided phrase ('[" +
-                  transcript +
-                  "]') doesn't match the expected key phrase. Please double-check and try again.";
-                startRecordingButton.style.display = "flex";
-
-                $("submit").style.display = "none";
 
                 //  $("submit").click();
                 // Create an audio element to preview the recordin
@@ -318,9 +321,28 @@
 
               if (isMobile) {
                 annyang.addCallback("result", function (phrases) {
-                  var result = phrases[0];
-                  transcript = result;
+                 $('modal').style.display='none'
+                  var results = phrases[0];
+                  transcript = results;
+                  console.log(results);
+                  let result = areSentencesAlmostSame(key_phrase, transcript);
+                  if (result) {
+                    //console.log(result);
+                    document.getElementById("error").innerHTML = "";
+                    startRecordingButton.style.display = "none";
+                    $("submit").style.display = "flex";
+                    annyang.abort()
+                    return $("submit").click();
+                  }
 
+                  document.getElementById("error").innerHTML =
+                    "Your provided phrase ('[" +
+                    transcript +
+                    "]') doesn't match the expected key phrase. Please double-check and try again.";
+                  startRecordingButton.style.display = "flex";
+
+                  $("submit").style.display = "none";
+                  annyang.abort();
                   // Do something with the transcript
                   // For example, you can trigger an action based on the recognized speech
                 });
@@ -339,14 +361,15 @@
               $("modal").style.display = "flex";
               setTimeout(() => {
                 stopRecordingButton.click();
-                startRecordingButton.style.display = "none";
+
+                //startRecordingButton.style.display = "none";
                 $("modal").style.display = "none";
-                $("submit").style.display = "flex";
-                isMobile() && annyang.abort();
+                 //$("submit").style.display = "flex";
               }, 7000);
             })
             .catch(
               (err) =>
+              console.log(err)
                 (document.getElementById("error").innerHTML =
                   "Please allow microphone access to record")
             );
@@ -355,7 +378,7 @@
         // Stop recording when the button is clicked
         stopRecordingButton.addEventListener("click", () => {
           mediaRecorder.stop();
-          startRecordingButton.style.display = "block";
+          startRecordingButton.style.display = "flex";
           stopRecordingButton.style.display = "none";
           document.getElementById("record_text").innerHTML =
             "Click play to start recording";
@@ -365,14 +388,15 @@
         voiceForm.addEventListener("submit", (e) => {
           e.preventDefault();
 
-          if (chunks.length == 0) {
-            startRecordingButton.style.display = "flex";
-            $("submit").style.display = "none";
-            $("submit").innerHTML = `Register Voice`;
-            document.getElementById("error").innerHTML =
-              "Please allow microphone access to record";
-            return;
-          }
+          // if (chunks.length == 0) {
+          // alert('hrlo')
+          //   startRecordingButton.style.display = "flex";
+          //   $("submit").style.display = "none";
+          //   $("submit").innerHTML = `Register Voice`;
+          //   document.getElementById("error").innerHTML =
+          //     "Please allow microphone access to record";
+          //   return;
+          // }
           $("submit").innerHTML = `
 <div role="status">
     <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -393,18 +417,18 @@
 
           console.log(new URLSearchParams(formData).toString());
           // Use fetch API to send form data to the server
-          fetch("/register-voice", {
-            method: "POST",
-            body: formData,
-          })
+          axios
+            .post("/register-voice", formData)
             .then((response) => {
               $("submit").innerHTML = `Register Voice`;
-              return response.text();
+              window.open("/login_with_voice.html", "_self");
             })
-            .then((data) => window.open("/login_with_voice.html", "_self"))
-            .catch((error) => {
-              $("submit").innerHTML = `Register Voice`;
+            .catch((error) => { 
+            $("submit").style.display = "none";
+              startRecordingButton.style.display = "flex";
+             
               document.getElementById("error").innerHTML =
+                error.response.data.message ||
                 "Please try again, an unexpected error occured.";
             });
         });

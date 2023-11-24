@@ -151,7 +151,7 @@
       <div class="boxen animate__animated animate__heartBeat">
         <p>
           Say the following key phrase:
-          <b>Serenading stars shine silently in the serene sky</b>
+          <b>Whispering winds, dancing leaves, under the moonlit eaves</b>
         </p>
         <div class="boxContainer">
           <div class="box box1"></div>
@@ -245,8 +245,8 @@
     <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
-    let isMobile = isMobileBrowser()
-      let key_phrase = "serenading stars shine silently in the serene sky";
+      let isMobile = isMobileBrowser();
+      let key_phrase = "Whispering winds, dancing leaves, under the moonlit eaves";
       let transcript = "";
       let $ = (id) => document.getElementById(id);
       document.addEventListener("DOMContentLoaded", () => {
@@ -284,21 +284,24 @@
                   mediaStream.getTracks().forEach((track) => track.stop());
                   mediaStream = null;
                 }
+                if (!isMobile) {
+                  let result = areSentencesAlmostSame(key_phrase, transcript);
+                  if (result) {
+                    //console.log(result);
+                    startRecordingButton.style.display = "none";
+                    $("submit").style.display = "flex";
+                    document.getElementById("error").innerHTML = "";
+                    return $("submit").click();
+                  }
 
-                let result = areSentencesAlmostSame(key_phrase, transcript);
-                if (result) {
-                  //console.log(result);
-                  document.getElementById("error").innerHTML = "";
-                  return $("submit").click();
+                  document.getElementById("error").innerHTML =
+                    "Your provided phrase ('[" +
+                    transcript +
+                    "]') doesn't match the expected key phrase. Please double-check and try again.";
+                  startRecordingButton.style.display = "flex";
+
+                  $("submit").style.display = "none";
                 }
-
-                document.getElementById("error").innerHTML =
-                  "Your provided phrase ('[" +
-                  transcript +
-                  "]') doesn't match the expected key phrase. Please double-check and try again.";
-                startRecordingButton.style.display = "flex";
-
-                $("submit").style.display = "none";
                 // Create an audio element to preview the recordin
 
                 // Append the audio element to the list
@@ -309,20 +312,50 @@
               };
 
               mediaRecorder.start();
-              window.SpeechRecognition = window.webkitSpeechRecognition;
-              let recognition = new SpeechRecognition();
-              recognition.interimResults = true;
+              if (isMobile) {
+                annyang.addCallback("result", function (phrases) {
+                  $("modal").style.display = "none";
+                  var results = phrases[0];
+                  transcript = results;
+                  console.log(results);
+                  let result = areSentencesAlmostSame(key_phrase, transcript);
+                  if (result) {
+                    //console.log(result);
+                    document.getElementById("error").innerHTML = "";
+                    startRecordingButton.style.display = "none";
+                    $("submit").style.display = "flex";
+                    annyang.abort();
+                    return $("submit").click();
+                  }
 
-              recognition.addEventListener("result", (r) => {
-                transcript = r.results[0][0].transcript;
-                //console.log(r);
-              });
-              recognition.start();
+                  document.getElementById("error").innerHTML =
+                    "Your provided phrase ('[" +
+                    transcript +
+                    "]') doesn't match the expected key phrase. Please double-check and try again.";
+                  startRecordingButton.style.display = "flex";
+
+                  $("submit").style.display = "none";
+                  annyang.abort();
+                  // Do something with the transcript
+                  // For example, you can trigger an action based on the recognized speech
+                });
+                annyang.start();
+              } else {
+                window.SpeechRecognition = window.webkitSpeechRecognition;
+                let recognition = new SpeechRecognition();
+                recognition.interimResults = true;
+
+                recognition.addEventListener("result", (r) => {
+                  transcript = r.results[0][0].transcript;
+                  //console.log(r);
+                });
+                recognition.start();
+              }
               $("modal").style.display = "flex";
               setTimeout(() => {
                 stopRecordingButton.click();
-                startRecordingButton.style.display = "none";
-                $("submit").style.display = "flex";
+                //startRecordingButton.style.display = "none";
+                //$("submit").style.display = "flex";
               }, 6000);
             })
             .catch(
@@ -351,14 +384,14 @@
 `;
           e.preventDefault();
 
-          if (chunks.length == 0) {
-            startRecordingButton.style.display = "flex";
-            $("submit").style.display = "none";
-            $("submit").innerHTML = `Sign in`;
-            document.getElementById("error").innerHTML =
-              "Please allow microphone access to record";
-            return;
-          }
+         // if (chunks.length == 0) {
+           // startRecordingButton.style.display = "flex";
+           // $("submit").style.display = "none";
+            //$("submit").innerHTML = `Sign in`;
+            //document.getElementById("error").innerHTML =
+              //"Please allow microphone access to record";
+           // return;
+          //}
 
           // Create FormData object and append the audio blob
           // Replace with your actual user ID

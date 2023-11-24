@@ -7,7 +7,7 @@ function areSentencesAlmostSame(sentence1, sentence2) {
     const similarity = stringSimilarity.compareTwoStrings(s1, s2);
 
     // Define a threshold for similarity
-    const similarityThreshold = 0.8; // Adjust as needed
+    const similarityThreshold = 0.5; // Adjust as needed
 
     // Check if the similarity is above the threshold
     return similarity >= similarityThreshold;
