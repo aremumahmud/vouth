@@ -428,7 +428,7 @@
               document.getElementById("error").innerHTML = "";
               localStorage.removeItem("UserID");
               localStorage.setItem("userToken", data.token);
-              window.open("/dash.html", "_self");
+              window.open("/dashboard.html", "_self");
             })
             .catch((error) => {
               startRecordingButton.style.display = "flex";
