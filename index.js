@@ -177,6 +177,7 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
               userVoice
             );
           } catch (err) {
+          console.log(err,11)
             return res.status(500).json({
               sucess: false,
               error: true,
@@ -201,6 +202,7 @@ app.post("/verify-voice", parser.single("voice"), async (req, res) => {
       )
       .end(req.file.buffer);
   } catch (error) {
+  console.log(error,1)
     // console.error(error);
     res.status(500).json({
       sucess: false,

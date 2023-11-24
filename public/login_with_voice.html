@@ -239,13 +239,14 @@
         </p>
       </div>
     </form>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="/js/isMobile.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
-    let key_phrase = "serenading stars shine silently in the serene sky";
+    let isMobile = isMobileBrowser()
+      let key_phrase = "serenading stars shine silently in the serene sky";
       let transcript = "";
       let $ = (id) => document.getElementById(id);
       document.addEventListener("DOMContentLoaded", () => {
@@ -284,15 +285,17 @@
                   mediaStream = null;
                 }
 
-                 let result = areSentencesAlmostSame(key_phrase, transcript);
+                let result = areSentencesAlmostSame(key_phrase, transcript);
                 if (result) {
                   //console.log(result);
-                   document.getElementById("error").innerHTML =''
+                  document.getElementById("error").innerHTML = "";
                   return $("submit").click();
                 }
 
                 document.getElementById("error").innerHTML =
-                  "Your provided phrase ('["+transcript+"]') doesn't match the expected key phrase. Please double-check and try again.";
+                  "Your provided phrase ('[" +
+                  transcript +
+                  "]') doesn't match the expected key phrase. Please double-check and try again.";
                 startRecordingButton.style.display = "flex";
 
                 $("submit").style.display = "none";
@@ -309,7 +312,7 @@
               window.SpeechRecognition = window.webkitSpeechRecognition;
               let recognition = new SpeechRecognition();
               recognition.interimResults = true;
-              
+
               recognition.addEventListener("result", (r) => {
                 transcript = r.results[0][0].transcript;
                 //console.log(r);
