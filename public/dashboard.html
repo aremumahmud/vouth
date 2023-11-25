@@ -744,11 +744,11 @@
         return false;
       }
 
-      // let userToken = localStorage.getItem("userToken");
-      //   if (!userToken) {
-      //       alert("you have to create an account to access this page");
-      //       window.open("/", "_self");
-      //   }
+      let userToken = localStorage.getItem("userToken");
+        if (!userToken) {
+            alert("you have to create an account to access this page");
+            window.open("/", "_self");
+        }
     </script>
   </body>
 </html>
