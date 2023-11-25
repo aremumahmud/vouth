@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>
-        E-LMS
-    </title>
+    <title>E-LMS</title>
     <meta name="description" content="Simple landind page" />
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
+      rel="stylesheet"
+    />
 
     <style>
-        .gradient {
-            background: linear-gradient(90deg, #333ed5 0%, #5188da 100%);
-        }
+      .gradient {
+        background: linear-gradient(90deg, #333ed5 0%, #5188da 100%);
+      }
     </style>
-</head>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  </head>
 
-<body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif">
+  <body
+    class="leading-normal tracking-normal text-white gradient"
+    style="font-family: 'Source Sans Pro', sans-serif"
+  >
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
-        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-            <div class="pl-4 flex items-center">
-                <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+      <div
+        class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2 slide-up"
+      >
+        <div class="pl-4 flex items-center">
+          <a
+            class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+            href="#"
+          >
             E-LMS
           </a>
-            </div>
-            <div class="block lg:hidden pr-4">
-                <button id="nav-toggle" class="flex items-center p-1 text-blue-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+        </div>
+        <div class="block lg:hidden pr-4">
+          <button
+            id="nav-toggle"
+            class="flex items-center p-1 text-blue-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+          >
             <svg
               class="fill-current h-6 w-6"
               viewBox="0 0 20 20"
@@ -39,11 +54,17 @@
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </button>
-            </div>
-            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-                <ul class="list-reset lg:flex justify-end flex-1 items-center">
-                    <li class="mr-3">
-                        <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Home</a
+        </div>
+        <div
+          class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
+          id="nav-content"
+        >
+          <ul class="list-reset lg:flex justify-end flex-1 items-center">
+            <li class="mr-3">
+              <a
+                class="inline-block py-2 px-4 text-black font-bold no-underline"
+                href="#"
+                >Home</a
               >
             </li>
             <li class="mr-3">
@@ -74,18 +95,18 @@
 
     <div class="pt-24">
       <div
-        class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center"
+        class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center "
       >
         <div
-          class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left"
+          class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left slide-up"
         >
-          <p class="uppercase tracking-loose w-full">Learning flexibility is the key</p>
+          <p class="uppercase tracking-loose w-full">
+            Learning flexibility is the key
+          </p>
           <h1 class="my-4 text-5xl font-bold leading-tight">
             Learn anywhere Learn anytime
           </h1>
-          <p class="leading-normal text-2xl mb-8">
-            
-          </p>
+          <p class="leading-normal text-2xl mb-8"></p>
           <button
             class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
           >
@@ -93,12 +114,12 @@
           </button>
         </div>
 
-        <div class="w-full md:w-3/5 py-6 text-center">
+        <div class="w-full md:w-3/5 py-6 text-center opacrev">
           <img class="w-full md:w-4/5 z-50" src="hero.png" />
         </div>
       </div>
     </div>
-    <div class="relative -mt-12 lg:-mt-24">
+    <div class="relative -mt-12 lg:-mt-24 slide-up">
       <svg
         viewBox="0 0 1428 174"
         version="1.1"
@@ -140,7 +161,7 @@
     <section class="bg-white border-b py-8">
       <div class="container max-w-5xl mx-auto m-8">
         <h2
-          class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800"
+          class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800 opacrev"
         >
           About Us
         </h2>
@@ -150,28 +171,27 @@
           ></div>
         </div>
         <div class="flex flex-wrap">
-          <div class="w-5/6 sm:w-1/2 p-6">
+          <div class="w-5/6 sm:w-1/2 p-6 slide-up">
             <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
               Know About Us
             </h3>
             <p class="text-gray-600 mb-8">
-              We aim at providing flexible learning opportunities by overcoming separation of teacher and learner using internet.
+              We aim at providing flexible learning opportunities by overcoming
+              separation of teacher and learner using internet.
               <br />
               <br />
 
               Read More
 
-              <a class="text-blue-500 underline" href="#"
-                >Click here</a
-              >
+              <a class="text-blue-500 underline" href="#">Click here</a>
             </p>
           </div>
-          <div class="w-full sm:w-1/2 p-6">
-            <img src="undraw_online_test_re_kyfx.svg" alt="Svg">
+          <div class="w-full sm:w-1/2 p-6 opacrev">
+            <img src="undraw_online_test_re_kyfx.svg" alt="Svg" />
           </div>
         </div>
         <div class="flex flex-wrap flex-col-reverse sm:flex-row">
-          <div class="w-full sm:w-1/2 p-6 mt-6">
+          <div class="w-full sm:w-1/2 p-6 mt-6 opacrev">
             <svg
               class="w-5/6 sm:h-64 mx-auto"
               viewBox="0 0 1176.60617 873.97852"
@@ -328,14 +348,14 @@
               <circle cx="600.35" cy="480.68" r="11.968" fill="#ff6347" />
             </svg>
           </div>
-          <div class="w-full sm:w-1/2 p-6 mt-6">
+          <div class="w-full sm:w-1/2 p-6 mt-6 slide-up">
             <div class="align-middle">
               <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
                 Learn from anywhere in the World
               </h3>
               <p class="text-gray-600 mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                at ipsum eu nunc commodo posuere et sit amet ligula. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum atque, provident nobis ut numquam corrupti dicta ratione at quia consectetur!
+                You cannot help but learn more as you take the world into your hands. Take it up reverently, for it is an old piece of clay, with millions of thumbprints on it. If no proper measures are taken to regulate e-learning, future learning will be compromised and sub-standard.
+              </p>
             </div>
           </div>
         </div>
@@ -344,7 +364,7 @@
     <section class="bg-white border-b py-8">
       <div class="container mx-auto flex flex-wrap pt-4 pb-12">
         <h2
-          class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800"
+          class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800 opacrev"
         >
           Our Blog
         </h2>
@@ -353,79 +373,106 @@
             class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"
           ></div>
         </div>
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+        <div
+          class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink slide-up"
+        >
           <div
             class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
           >
             <a href="#" class="flex flex-wrap no-underline hover:no-underline">
               <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                xGETTING STARTED
+                ONLINE CLASSES
               </p>
               <div class="w-full font-bold text-xl text-gray-800 px-6">
                 Lorem ipsum dolor sit amet.
               </div>
               <p class="text-gray-800 text-base px-6 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                at ipsum eu nunc commodo posuere et sit amet ligula.
+                “Anyone who stops learning is old, whether at twenty or eighty. Anyone who keeps learning stays young. The greatest thing in life is to keep your mind young.” — Henry Ford
               </p>
             </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-start">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                Action
+          </div>
+          <div
+            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
+          >
+            <div class="flex items-center justify-start">
+              <button
+                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              >
+                Read More
               </button>
-                </div>
             </div>
+          </div>
         </div>
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        xGETTING STARTED
-                    </p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Lorem ipsum dolor sit amet.
-                    </div>
-                    <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                    </p>
-                </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-center">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                Action
+        <div
+          class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink slide-up"
+        >
+          <div
+            class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
+          >
+            <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+              <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                ONLINE CLASSES
+              </p>
+              <div class="w-full font-bold text-xl text-gray-800 px-6">
+                Lorem ipsum dolor sit amet.
+              </div>
+              <p class="text-gray-800 text-base px-6 mb-5">
+                “Research shows that you begin learning in the womb and go right on learning until the moment you pass on. Your brain has a capacity for learning that is virtually limitless, which makes every human a potential genius.” — Michael J. Gelb
+              </p>
+            </a>
+          </div>
+          <div
+            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
+          >
+            <div class="flex items-center justify-center">
+              <button
+                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              >
+                Read More
               </button>
-                </div>
             </div>
+          </div>
         </div>
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">
-                        xGETTING STARTED
-                    </p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Lorem ipsum dolor sit amet.
-                    </div>
-                    <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-                    </p>
-                </a>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-end">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                Action
+        <div
+          class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink slide-up"
+        >
+          <div
+            class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
+          >
+            <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+              <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                ONLINE CLASSES
+              </p>
+              <div class="w-full font-bold text-xl text-gray-800 px-6">
+                Lorem ipsum dolor sit amet.
+              </div>
+              <p class="text-gray-800 text-base px-6 mb-5">
+                One hour per day of study in your chosen field is all it takes. One hour per day of study will put you at the top of your field within three years. Within five years you’ll be a national authority. In seven years, you can be one of the best people in the world at what you do.” — Earl Nightingale
+              </p>
+            </a>
+          </div>
+          <div
+            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
+          >
+            <div class="flex items-center justify-end">
+              <button
+                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              >
+                Read More
               </button>
-                </div>
             </div>
+          </div>
         </div>
-        </div>
-        </section>
+      </div>
+    </section>
 
-        <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg
+      class="wave-top"
+      viewBox="0 0 1439 147"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
           <g class="wave" fill="#f8fafc">
@@ -454,34 +501,44 @@
         </g>
       </g>
     </svg>
-        <section class="container mx-auto text-center py-6 mb-12">
-            <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-                Join Us Today!
-            </h2>
-            <div class="w-full mb-4">
-                <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <h3 class="my-4 text-3xl leading-tight">
-                Enroll here for easy learning
-            </h3>
-            <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+    <section class="container mx-auto text-center py-6 mb-12">
+      <h2
+        class="w-full my-2 text-5xl font-bold leading-tight text-center text-white opacrev"
+      >
+        Join Us Today!
+      </h2>
+      <div class="w-full mb-4">
+        <div
+          class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"
+        ></div>
+      </div>
+      <h3 class="my-4 text-3xl leading-tight slide-up">Enroll here for easy learning</h3>
+      <button
+        class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+      >
         Enroll
       </button>
-        </section>
+    </section>
 
-        <footer class="bg-white">
-            <div class="container mx-auto px-8">
-                <div class="w-full flex flex-col md:flex-row py-6">
-                    <div class="flex-1 mb-6 text-black">
-                        <a class="text-blue-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+    <footer class="bg-white">
+      <div class="container mx-auto px-8 opacrev">
+        <div class="w-full flex flex-col md:flex-row py-6">
+          <div class="flex-1 mb-6 text-black">
+            <a
+              class="text-blue-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+              href="#"
+            >
               E-LMS
             </a>
-                    </div>
-                    <div class="flex-1">
-                        <p class="uppercase text-gray-500 md:mb-6">Links</p>
-                        <ul class="list-reset mb-6">
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#" class="no-underline hover:underline text-gray-800 hover:text-blue-500">FAQ</a
+          </div>
+          <div class="flex-1">
+            <p class="uppercase text-gray-500 md:mb-6">Links</p>
+            <ul class="list-reset mb-6">
+              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                <a
+                  href="#"
+                  class="no-underline hover:underline text-gray-800 hover:text-blue-500"
+                  >FAQ</a
                 >
               </li>
               <li class="mt-2 inline-block mr-2 md:block md:mr-0">
@@ -546,7 +603,7 @@
             </ul>
           </div>
           <div class="flex-1">
-            <p class="uppercase text-gray-500 md:mb-6">Company</p>
+            <p class="uppercase text-gray-500 md:mb-6">Education</p>
             <ul class="list-reset mb-6">
               <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                 <a
@@ -573,7 +630,6 @@
           </div>
         </div>
       </div>
-  
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -621,6 +677,36 @@
         }
       });
     </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      var slideUp = {
+        distance: "110%",
+        origin: "bottom",
+        opacity: .2,
+        duration:1500,
+        easing: "cubic-bezier(0.5, 0, 0, 1)",
+      };
+      var opacrev = {
+        // distance: "110%",
+        origin: "top",
+        opacity: 0,
+        duration:2000,
+        easing: "cubic-bezier(0.5, 0, 0, 1)",
+      };
+      var opacscl = {
+        distance: "110%",
+        origin: "center",
+        scale: 0,
+        opacity: 0,
+        duration:1500,
+        easing: "cubic-bezier(0.5, 0, 0, 1)",
+      };
+
+      ScrollReveal().reveal(".slide-up", slideUp);
+      ScrollReveal().reveal(".opacrev", opacrev);
+      ScrollReveal().reveal(".opacscl", opacscl);
+
+    </script>
     <script>
       /*Toggle dropdown list*/
       /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
@@ -658,11 +744,11 @@
         return false;
       }
 
-      let userToken = localStorage.getItem("userToken");
-        if (!userToken) {
-            alert("you have to create an account to access this page");
-            window.open("/", "_self");
-        }
+      // let userToken = localStorage.getItem("userToken");
+      //   if (!userToken) {
+      //       alert("you have to create an account to access this page");
+      //       window.open("/", "_self");
+      //   }
     </script>
   </body>
 </html>
