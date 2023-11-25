@@ -122,7 +122,25 @@
             animation-name: quiet;
         }
     </style>
+<<<<<<< HEAD
 </head>
+=======
+  </head>
+  <body>
+    <div class="modal" id="modal">
+      <div class="boxen animate__animated animate__heartBeat">
+        <p>
+          Say the following key phrase:
+          <b>Whispering winds, dancing leaves, under the Whispering leaves</b>
+        </p>
+        <div class="boxContainer">
+          <div class="box box1"></div>
+          <div class="box box2"></div>
+          <div class="box box3"></div>
+          <div class="box box4"></div>
+          <div class="box box5"></div>
+        </div>
+>>>>>>> 08b7f12 (changed key phrases)
 
 <body>
     <div class="modal" id="modal">
@@ -192,6 +210,7 @@
     <script src="/js/isMobile.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
+<<<<<<< HEAD
         let isMobile = isMobileBrowser();
         let key_phrase =
             "Whispering winds, dancing leaves, under the moonlit eaves";
@@ -202,6 +221,17 @@
             alert("you have to create an account to access this page");
             window.open("/", "_self");
         }
+=======
+      let isMobile = isMobileBrowser();
+      let key_phrase = "Whispering winds, dancing leaves, under the Whispering leaves";
+      let $ = (id) => document.getElementById(id);
+      let transcript = "";
+      let userID = localStorage.getItem("UserID");
+      if (!userID) {
+        alert("you have to create an account to access this page");
+        window.open("/", "_self");
+      }
+>>>>>>> 08b7f12 (changed key phrases)
 
         document.addEventListener("DOMContentLoaded", () => {
             const voiceForm = document.getElementById("form");

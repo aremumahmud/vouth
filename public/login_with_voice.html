@@ -125,6 +125,7 @@
 
 <body>
     <div class="modal" id="modal">
+<<<<<<< HEAD
         <div class="boxen animate__animated animate__heartBeat">
             <p>
                 Say the following key phrase:
@@ -147,6 +148,19 @@
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Sign in with Your Voice
             </h2>
+=======
+      <div class="boxen animate__animated animate__heartBeat">
+        <p>
+          Say the following key phrase:
+          <b>Whispering winds, dancing leaves, under the Whispering leaves</b>
+        </p>
+        <div class="boxContainer">
+          <div class="box box1"></div>
+          <div class="box box2"></div>
+          <div class="box box3"></div>
+          <div class="box box4"></div>
+          <div class="box box5"></div>
+>>>>>>> 08b7f12 (changed key phrases)
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -195,6 +209,7 @@
     <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
+<<<<<<< HEAD
         let isMobile = isMobileBrowser();
         let key_phrase = "Whispering winds, dancing leaves, under the moonlit eaves";
         let transcript = "";
@@ -206,6 +221,19 @@
             const startRecordingButton = document.getElementById("startRecording");
             const stopRecordingButton = document.getElementById("stopRecording");
             const submitFormButton = document.getElementById("submitForm");
+=======
+      let isMobile = isMobileBrowser();
+      let key_phrase = "Whispering winds, dancing leaves, under the Whispering leaves";
+      let transcript = "";
+      let $ = (id) => document.getElementById(id);
+      document.addEventListener("DOMContentLoaded", () => {
+        const voiceForm = document.getElementById("form");
+        const userIdInput = document.getElementById("userId");
+        //  const recordingsList = document.getElementById('recordingsList');
+        const startRecordingButton = document.getElementById("startRecording");
+        const stopRecordingButton = document.getElementById("stopRecording");
+        const submitFormButton = document.getElementById("submitForm");
+>>>>>>> 08b7f12 (changed key phrases)
 
             let mediaRecorder;
             let chunks = [];
