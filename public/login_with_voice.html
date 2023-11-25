@@ -182,19 +182,21 @@
                 </div>
             </div>
             <p class="mt-10 text-center text-sm text-gray-500">
-                Not a member?{' '}
+                Not a member?
                 <a href="/" class="font-semibold leading-6 text-gray-600 hover:text-indigo-500">
             Sign up with us here
           </a>
             </p>
         </div>
     </form>
+  <script type="text/javascript" src="https://unpkg.com/julius@0.1.0/julius.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
     <script src="/js/isMobile.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
+     // annyang.setPreference('continuous',false)
         let isMobile = isMobileBrowser();
         let key_phrase = "Whispering winds, dancing leaves, under the Whispering leaves";
         let transcript = "";
@@ -213,7 +215,7 @@
 
             // Start recording when the button is clicked
             startRecordingButton.addEventListener("click", () => {
-                chunks = [];
+              //  chunks = [];
                 navigator.mediaDevices
                     .getUserMedia({
                         audio: true
@@ -233,7 +235,7 @@
                                 type: "audio/wav"
                             });
                             const audioUrl = URL.createObjectURL(blob);
-                            alert(audioUrl);
+                           // alert(audioUrl);
 
                             if (mediaStream) {
                                 mediaStream.getTracks().forEach((track) => track.stop());
@@ -350,6 +352,7 @@
 
                 // Create FormData object and append the audio blob
                 // Replace with your actual user ID
+            //  alert(chunks)
                 const formData = new FormData(voiceForm);
                 formData.append(
                     "voice",

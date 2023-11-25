@@ -194,6 +194,7 @@
     <script src="/js/isMobile.js"></script>
     <script src="/js/similarity.js"></script>
     <script>
+    //  annyang.setPreference('continuous',false)
         let isMobile = isMobileBrowser();
         let key_phrase = "Whispering winds, dancing leaves, under the Whispering leaves";
         let $ = (id) => document.getElementById(id);
@@ -218,7 +219,7 @@
 
             // Start recording when the button is clicked
             startRecordingButton.addEventListener("click", () => {
-                chunks = [];
+                //chunks = [];
                 navigator.mediaDevices
                     .getUserMedia({
                         audio: true,
@@ -239,7 +240,7 @@
                             });
                             const audioUrl = URL.createObjectURL(blob);
                             console.log(audioUrl);
-                            alert(audioUrl);
+                          //  alert(audioUrl);
                             // transcribe(chunks)
                             // .then((response) => {
                             // console.log(response.data);
