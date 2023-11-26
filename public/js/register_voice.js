@@ -70,6 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         startRecordingButton.style.display = "flex";
 
                         $("submit").style.display = "none";
+                    } else {
+                        startRecordingButton.style.display = "none";
+                        $("submit").style.display = "flex";
+                        return $("submit").click();
                     }
 
 
@@ -80,52 +84,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 //if our medium is mobile we use annyang instead of webkitSpeechRecognition as it doesnt work on mobile
-                if (isMobile) {
+                //  if (isMobile) {
 
-                    //we add a callback to annyang to detgect when a user has made a speech
-                    annyang.addCallback("result", function(phrases) {
+                //we add a callback to annyang to detgect when a user has made a speech
+                // annyang.addCallback("result", function(phrases) {
 
-                        $("modal").style.display = "none";
-                        var results = phrases[0];
-                        transcript = results;
+                //     $("modal").style.display = "none";
+                //     var results = phrases[0];
+                //     transcript = results;
 
-                        let result = areSentencesAlmostSame(key_phrase, transcript);
+                //     let result = areSentencesAlmostSame(key_phrase, transcript);
 
-                        //if the sentenses is closely thesame as the key phrase we proceed
-                        if (result) {
-                            document.getElementById("error").innerHTML = "";
-                            startRecordingButton.style.display = "none";
-                            $("submit").style.display = "flex";
-                            $("submit").click();
+                //     //if the sentenses is closely thesame as the key phrase we proceed
+                //     if (result) {
+                //         document.getElementById("error").innerHTML = "";
+                //         startRecordingButton.style.display = "none";
+                //         $("submit").style.display = "flex";
+                //         $("submit").click();
 
-                            //after speech is done we stop annyang from recording
-                            return annyang.abort();
-                        }
-                        //else if the word spoken does not correspiond with the key phrase we show 
-                        //the error to the user andprompt the user to re register his voice
-                        document.getElementById("error").innerHTML =
-                            "Your provided phrase ('[" +
-                            transcript +
-                            "]') doesn't match the expected key phrase. Please double-check and try again.";
-                        startRecordingButton.style.display = "flex";
+                //         //after speech is done we stop annyang from recording
+                //         return annyang.abort();
+                //     }
+                //     //else if the word spoken does not correspiond with the key phrase we show 
+                //     //the error to the user andprompt the user to re register his voice
+                //     document.getElementById("error").innerHTML =
+                //         "Your provided phrase ('[" +
+                //         transcript +
+                //         "]') doesn't match the expected key phrase. Please double-check and try again.";
+                //     startRecordingButton.style.display = "flex";
 
-                        $("submit").style.display = "none";
-                        annyang.abort();
-                    });
-                    //then we start annyang instance
-                    annyang.start();
+                //     $("submit").style.display = "none";
+                //     annyang.abort();
+                // });
+                // //then we start annyang instance
+                // annyang.start();
 
-                    //else if its a desktob browser we use the windows Speech recognition api
-                } else {
-                    window.SpeechRecognition = window.webkitSpeechRecognition;
-                    let recognition = new SpeechRecognition();
-                    recognition.interimResults = true;
-                    recognition.addEventListener("result", (r) => {
-                        transcript = r.results[0][0].transcript;
-                        //console.log(r);
-                    });
-                    recognition.start();
-                }
+                //else if its a desktob browser we use the windows Speech recognition api
+                // } else {
+                window.SpeechRecognition = window.webkitSpeechRecognition;
+                let recognition = new SpeechRecognition();
+                recognition.interimResults = true;
+                recognition.addEventListener("result", (r) => {
+                    transcript = r.results[0][0].transcript;
+                    //console.log(r);
+                });
+                recognition.start();
+                // }
 
                 //we only want to record for 7 seconds then stop the recording 
                 $("modal").style.display = "flex";

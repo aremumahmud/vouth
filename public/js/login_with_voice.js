@@ -60,49 +60,53 @@ document.addEventListener("DOMContentLoaded", () => {
                         startRecordingButton.style.display = "flex";
 
                         $("submit").style.display = "none";
+                    } else {
+                        startRecordingButton.style.display = "none";
+                        $("submit").style.display = "flex";
+                        return $("submit").click();
                     }
 
                 };
 
                 mediaRecorder.start();
-                if (isMobile) {
-                    annyang.addCallback("result", function(phrases) {
-                        $("modal").style.display = "none";
-                        var results = phrases[0];
-                        transcript = results;
-                        console.log(results);
-                        let result = areSentencesAlmostSame(key_phrase, transcript);
-                        if (result) {
-                            //console.log(result);
-                            document.getElementById("error").innerHTML = "";
-                            startRecordingButton.style.display = "none";
-                            $("submit").style.display = "flex";
-                            annyang.abort();
-                            return $("submit").click();
-                        }
+                // if (isMobile) {
+                // annyang.addCallback("result", function(phrases) {
+                //     $("modal").style.display = "none";
+                //     var results = phrases[0];
+                //     transcript = results;
+                //     console.log(results);
+                //     let result = areSentencesAlmostSame(key_phrase, transcript);
+                //     if (result) {
+                //         //console.log(result);
+                //         document.getElementById("error").innerHTML = "";
+                //         startRecordingButton.style.display = "none";
+                //         $("submit").style.display = "flex";
+                //         annyang.abort();
+                //         return $("submit").click();
+                //     }
 
-                        document.getElementById("error").innerHTML =
-                            "Your provided phrase ('[" +
-                            transcript +
-                            "]') doesn't match the expected key phrase. Please double-check and try again.";
-                        startRecordingButton.style.display = "flex";
+                //     document.getElementById("error").innerHTML =
+                //         "Your provided phrase ('[" +
+                //         transcript +
+                //         "]') doesn't match the expected key phrase. Please double-check and try again.";
+                //     startRecordingButton.style.display = "flex";
 
-                        $("submit").style.display = "none";
-                        annyang.abort();
+                //     $("submit").style.display = "none";
+                //     annyang.abort();
 
-                    });
-                    annyang.start();
-                } else {
-                    window.SpeechRecognition = window.webkitSpeechRecognition;
-                    let recognition = new SpeechRecognition();
-                    recognition.interimResults = true;
+                // });
+                // annyang.start();
+                // } else {
+                window.SpeechRecognition = window.webkitSpeechRecognition;
+                let recognition = new SpeechRecognition();
+                recognition.interimResults = true;
 
-                    recognition.addEventListener("result", (r) => {
-                        transcript = r.results[0][0].transcript;
-                        //console.log(r);
-                    });
-                    recognition.start();
-                }
+                recognition.addEventListener("result", (r) => {
+                    transcript = r.results[0][0].transcript;
+                    //console.log(r);
+                });
+                recognition.start();
+                // }
                 $("modal").style.display = "flex";
                 setTimeout(() => {
                     stopRecordingButton.click();
