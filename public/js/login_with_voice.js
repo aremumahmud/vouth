@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
                         startRecordingButton.style.display = "none";
                         $("submit").style.display = "flex";
+                        $('mobile').value = "true"
                         return $("submit").click();
                     }
 

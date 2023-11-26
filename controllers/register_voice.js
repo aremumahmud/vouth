@@ -1,10 +1,12 @@
 const User = require("../Models/UserModel");
 const cloudinary = require("../utils/cloudinary");
+const transcribe = require("./transcribe");
+const stSimilarity = require("string-similarity");
 
 async function RegisterVoice(req, res) {
     //console.log(req.body);
-    const { userId } = req.body;
-
+    const { userId, mobile } = req.body;
+    console.log(mobile);
     try {
         // Upload the file to Cloudinary
         const result = await cloudinary.uploader
@@ -17,31 +19,47 @@ async function RegisterVoice(req, res) {
                 },
                 async(error, result) => {
                     if (error) {
-                        console.log(error)
+                        console.log(error);
                         throw error;
                     }
+
+                    if (mobile === 'true') {
+                        let { transcript } = await transcribe(result.secure_url);
+                        let phrase =
+                            "Whispering winds, dancing leaves, under the Whispering leaves";
+                        let isSimilar =
+                            stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
+
+                        if (!isSimilar) {
+                            return res.status(401).json({
+                                error: true,
+                                sucess: false,
+                                message: `Your provided phrase ('[ ${transcript} ]') doesn't match the expected key phrase. Please double-check and try again.`,
+                            });
+                        }
+                    }
+
+
 
                     let user;
                     try {
                         user = await User.findById(userId);
                     } catch (e) {
-                        user = null
+                        user = null;
                     }
 
                     // console.log(user , result)
 
                     if (!user) {
-                        console.log(user)
-                        return res
-                            .status(401)
-                            .json({
-                                error: true,
-                                sucess: false,
-                                message: "User not Found, You have to register first to register a voice",
-                            });
+                        console.log(user);
+                        return res.status(401).json({
+                            error: true,
+                            sucess: false,
+                            message: "User not Found, You have to register first to register a voice",
+                        });
                     }
 
-                    console.log(user)
+                    console.log(user);
                     user.voice = result.secure_url;
                     user = await user.save();
 
@@ -55,4 +73,4 @@ async function RegisterVoice(req, res) {
     }
 }
 
-module.exports = RegisterVoice
+module.exports = RegisterVoice;

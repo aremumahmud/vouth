@@ -2,10 +2,12 @@ const User = require("../Models/UserModel");
 const performVoiceVerification = require("../utils/verify_voice");
 const cloudinary = require("../utils/cloudinary");
 const jwt = require("jsonwebtoken");
+const transcribe = require("./transcribe");
+const stSimilarity = require("string-similarity");
 
 async function VerifyVoice(req, res) {
     console.log(req.body);
-    const { username } = req.body;
+    const { username, mobile } = req.body;
 
     try {
         // Upload the file to Cloudinary
@@ -23,6 +25,22 @@ async function VerifyVoice(req, res) {
                         return res
                             .status(401)
                             .json({ error: true, message: "an unexpected error occured" });
+                    }
+
+                    if (mobile === 'true') {
+                        let { transcript } = await transcribe(result.secure_url);
+                        let phrase =
+                            "Whispering winds, dancing leaves, under the Whispering leaves";
+                        let isSimilar =
+                            stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
+
+                        if (!isSimilar) {
+                            return res.status(401).json({
+                                error: true,
+                                sucess: false,
+                                message: `Your provided phrase ('[ ${transcript} ]') doesn't match the expected key phrase. Please double-check and try again.`,
+                            });
+                        }
                     }
 
                     const user = await User.findOne({ username: username });
