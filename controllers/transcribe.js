@@ -1,6 +1,23 @@
-async function transcribe(url) {
+const axios = require('axios');
 
-    return { transcript: 'Whispering winds, dancing leaves, under the Whispering leaves' }
+async function transcribe(url) {
+    try {
+        const response = await axios.post('https://speech-recognition.aremumoney.repl.co/transcribe', {
+            audio_url: url,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers if needed
+            },
+        });
+
+        // Assuming the API response has a structure like { transcript: '...' }
+        return { transcript: response.data.transcript || '' };
+    } catch (error) {
+        console.error(error);
+        // Return an empty transcript in case of an error
+        return { transcript: '' };
+    }
 }
 
-module.exports = transcribe
+module.exports = transcribe;
