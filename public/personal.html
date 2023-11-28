@@ -123,6 +123,10 @@
 </div>
 `;
         e.preventDefault();
+        let name = $('fullname').innerHTML.split(' ')
+        if (name.length < 2) {
+            return $('error').innerHTML = "Please enter both your firstname and lastname"
+        }
 
         if (!localStorage.getItem('UserID')) {
             $("submit").innerHTML = `Continue`;
