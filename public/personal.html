@@ -43,7 +43,7 @@
               Full Name
             </label>
                     <div class="mt-2">
-                        <input id="username" name="full_name" type="text" autocomplete="name" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        <input id="full_name" name="full_name" type="text" autocomplete="name" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                     </div>
                 </div>
@@ -123,10 +123,11 @@
 </div>
 `;
         e.preventDefault();
-        let name = $('fullname').innerHTML.split(' ')
-        if (name.length < 2) {
-            return $('error').innerHTML = "Please enter both your firstname and lastname"
-        }
+        //let name = $('full_name').innerHTML.trim().split(' ')
+        //if (name.length < 2) {
+        //  $("submit").innerHTML = `Continue`;
+        //return $('error').innerHTML = "Please enter both your firstname and lastname"
+        //}
 
         if (!localStorage.getItem('UserID')) {
             $("submit").innerHTML = `Continue`;

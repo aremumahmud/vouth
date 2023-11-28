@@ -6,7 +6,7 @@ const transcribe = require("./transcribe");
 const stSimilarity = require("string-similarity");
 
 async function VerifyVoice(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const { username, mobile } = req.body;
 
     try {
