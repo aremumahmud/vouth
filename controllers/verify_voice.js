@@ -4,10 +4,11 @@ const cloudinary = require("../utils/cloudinary");
 const jwt = require("jsonwebtoken");
 const transcribe = require("./transcribe");
 const stSimilarity = require("string-similarity");
+const performVoiceAuthenticate = require("../utils/Authenticate_user");
 
 async function VerifyVoice(req, res) {
     // console.log(req.body);
-    const { username, mobile } = req.body;
+    const { mobile } = req.body;
 
     try {
         // Upload the file to Cloudinary
@@ -43,31 +44,16 @@ async function VerifyVoice(req, res) {
                         }
                     }
 
-                    const user = await User.findOne({ username: username });
 
-                    if (!user)
-                        return res
-                            .status(401)
-                            .json({ error: true, message: "username not found" });
-
-                    const userVoice = user.voice;
                     const voiceUrl = result.secure_url;
-
-                    if (!userVoice)
-                        return res.status(401).json({
-                            sucess: false,
-                            error: true,
-                            message: "voice_not_registered",
-                            userId: user._id,
-                        });
 
                     let verificationResult;
                     try {
                         //Perform voice verification logic (replace with your own logic)
 
-                        verificationResult = await performVoiceVerification(
-                            voiceUrl,
-                            userVoice
+                        verificationResult = await performVoiceAuthenticate(
+                            voiceUrl
+
                         );
                     } catch (err) {
                         console.log(err, 11);
@@ -86,7 +72,7 @@ async function VerifyVoice(req, res) {
                     }
                     if (verificationResult.sucess) {
                         // Generate JWT token
-                        const token = jwt.sign({ userId: user._id }, "your-secret-key");
+                        const token = jwt.sign({ userId: verificationResult.userId }, "your-secret-key");
                         res.json({ error: false, token });
                     } else {
                         res.status(401).json(verificationResult);

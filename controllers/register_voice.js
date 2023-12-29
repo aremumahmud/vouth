@@ -1,5 +1,6 @@
 const User = require("../Models/UserModel");
 const cloudinary = require("../utils/cloudinary");
+const performVoiceEnrollment = require("../utils/enroll_user");
 const transcribe = require("./transcribe");
 const stSimilarity = require("string-similarity");
 
@@ -59,11 +60,31 @@ async function RegisterVoice(req, res) {
                         });
                     }
 
-                    console.log(user);
+                    if (user.voices_array.length === 3) {
+                        return res.json({ done: true, user })
+                    }
+
+                    user.voices_array.push(result.secure_url)
                     user.voice = result.secure_url;
                     user = await user.save();
 
-                    res.json({ user });
+                    let to_done_count = user.voices_array.length
+
+                    if (to_done_count < 3) {
+                        return res.json({ done: false, count: to_done_count })
+                    }
+
+                    let Enrollment_status = await performVoiceEnrollment(user._id, user.voices_array)
+
+                    if (Enrollment_status.sucess) {
+                        return res.json({ user, done: true });
+                    }
+                    res.status(401).json({
+                        error: true,
+                        sucess: false,
+                        message: Enrollment_status.message,
+                    });
+
                 }
             )
             .end(req.file.buffer);

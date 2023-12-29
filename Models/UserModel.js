@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     full_name: String,
     date_of_birth: String,
     course: String,
-    address: String
+    address: String,
+    voices_array: []
 });
 
 const User = mongoose.model("User", userSchema);

@@ -184,6 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
         axios
             .post("/register-voice", formData)
             .then((response) => {
+                let data = response.data
+                if (!data.done) {
+                    document.getElementById("progress").innerHTML = `You have registered your voice ${data.count} times, \b ${3-data.count} to go`
+                    document.getElementById("error").innerHTML = ''
+                    $("submit").style.display = "none";
+                    startRecordingButton.style.display = "flex";
+                    return
+                }
+                console.log(data)
                 $("submit").innerHTML = `Register Voice`;
                 window.open("/login_with_voice.html", "_self");
             })
