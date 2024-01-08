@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             return window.open('/', '_self')
                         }
 
-                        $('#full_name').text(response.full_name)
+                        $('full_name').text(response.full_name)
                     })
                     //window.open("/dashboard.html", "_self");
             })
