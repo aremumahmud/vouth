@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function transcribe(url) {
     try {
-        const response = await axios.post('https://speech-recognition.aremumoney.repl.co/transcribe', {
+        const response = await axios.post(process.env.transcribe, {
             audio_url: url,
         }, {
             headers: {
