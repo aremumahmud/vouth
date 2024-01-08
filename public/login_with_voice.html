@@ -128,11 +128,25 @@
 </head>
 
 <body>
+    <div class="modal" id="logged_user">
+        <div class="boxen animate__animated animate__heartBeat">
+            <p>
+                <i style="font-size: 100px;" class="fa fa-user"></i> </p>
+
+
+            <p>Continue as:
+                <b><a style="text-decoration: underline;"  href="/dashboard.html"><span id="full_name"></span></a>?
+                </b>
+            </p>
+            <p>Not this user?,
+                <a style="text-decoration: underline;" href="/login_with_voice.html">retry here</a></p>
+        </div>
+    </div>
     <div class="modal" id="modal">
         <div class="boxen animate__animated animate__heartBeat">
             <p>
-                Say the following key phrase:
-                <b>Whispering winds, dancing leaves, under the Whispering leaves</b>
+                Say any phrase to verify yourself .
+                <!-- <b>Whispering winds, dancing leaves, under the Whispering leaves</b> -->
             </p>
             <div class="boxContainer">
                 <div class="box box1"></div>
@@ -200,6 +214,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/js/similarity.js"></script>
+    <script src="/js/fetchUser.js"></script>
     <script src="/js/login_with_voice.js"></script>
 </body>
 

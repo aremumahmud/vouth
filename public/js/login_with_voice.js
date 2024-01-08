@@ -44,19 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         mediaStream = null;
                     }
                     if (!isMobile) {
-                        let result = areSentencesAlmostSame(key_phrase, transcript);
+                        let result = transcript.length > 25;
+                        console.log(transcript);
                         if (result) {
-                            //console.log(result);
+
                             startRecordingButton.style.display = "none";
                             $("submit").style.display = "flex";
                             document.getElementById("error").innerHTML = "";
                             return $("submit").click();
                         }
 
-                        document.getElementById("error").innerHTML =
-                            "Your provided phrase ('[" +
-                            transcript +
-                            "]') doesn't match the expected key phrase. Please double-check and try again.";
+                        document.getElementById("error").innerHTML = "Voice provided was too short, please try again";
                         startRecordingButton.style.display = "flex";
 
                         $("submit").style.display = "none";
@@ -173,7 +171,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("error").innerHTML = "";
                 localStorage.removeItem("UserID");
                 localStorage.setItem("userToken", data.token);
-                window.open("/dashboard.html", "_self");
+                document.getElementById('logged_user').style.display = 'flex'
+                FetchUser().then(response => {
+                        //console.log(response)
+                        if (response.error) {
+
+                            //alert(response.message)
+                            return window.open('/', '_self')
+                        }
+
+                        $('#full_name').text(response.full_name)
+                    })
+                    //window.open("/dashboard.html", "_self");
             })
             .catch((error) => {
                 startRecordingButton.style.display = "flex";

@@ -30,16 +30,16 @@ async function VerifyVoice(req, res) {
 
                     if (mobile === 'true') {
                         let { transcript } = await transcribe(result.secure_url);
-                        let phrase =
-                            "Whispering winds, dancing leaves, under the Whispering leaves";
-                        let isSimilar =
-                            stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
+                        // let phrase =
+                        //     "Whispering winds, dancing leaves, under the Whispering leaves";
+                        // let isSimilar =
+                        //     stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
 
-                        if (!isSimilar) {
+                        if (transcript.length < 25) {
                             return res.status(401).json({
                                 error: true,
                                 sucess: false,
-                                message: `Your provided phrase ('[ ${transcript} ]') doesn't match the expected key phrase. Please double-check and try again.`,
+                                message: `Phrase provided was too short, please try again`,
                             });
                         }
                     }
