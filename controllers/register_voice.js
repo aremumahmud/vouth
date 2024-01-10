@@ -27,7 +27,7 @@ async function RegisterVoice(req, res) {
                     if (mobile === 'true') {
                         let { transcript } = await transcribe(result.secure_url);
                         let phrase =
-                            "Whispering winds, dancing leaves, under the Whispering leaves";
+                            "Access Identity Verification Required";
                         let isSimilar =
                             stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
 
