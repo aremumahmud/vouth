@@ -190,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.getElementById("error").innerHTML = ''
                     $("submit").style.display = "none";
                     startRecordingButton.style.display = "flex";
+                    transcript = ''
                     return
                 }
                 console.log(data)

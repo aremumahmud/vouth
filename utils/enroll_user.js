@@ -13,7 +13,7 @@ async function performVoiceEnrollment(user, voices) {
 
     try {
         const response = await axios.post(process.env.enroll_api, options);
-        // console.log(response.data);
+        console.log(response.data);
         let response_data = response.data
 
         if (response_data.status === 'success') {
@@ -29,7 +29,7 @@ async function performVoiceEnrollment(user, voices) {
             sucess: false,
         };
     } catch (error) {
-        //console.log(error)
+        console.log(error)
 
         return {
             message: "Voice Enrollment failed, Please try again",

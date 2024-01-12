@@ -13,7 +13,7 @@ async function performVoiceAuthenticate(voice) {
 
     try {
         const response = await axios.post(process.env.auth_api, options);
-        // console.log(response.data);
+        console.log(response.data, 'njmnb');
         let response_data = response.data
 
         if (response_data.status === 'success') {
@@ -38,7 +38,7 @@ async function performVoiceAuthenticate(voice) {
             sucess: false,
         };
     } catch (error) {
-        //console.log(error)
+        console.log(error)
 
         return {
             message: "Voice Authentication failed, Please try again",

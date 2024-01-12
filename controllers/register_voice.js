@@ -71,8 +71,10 @@ async function RegisterVoice(req, res) {
                             verificationResult = await performVoiceAuthenticate(
                                 result.secure_url
                             );
+
+                            // console.log(verificationResult)
                         } catch (err) {
-                            console.log(err, 11);
+                            // console.log(err, 11);
                             return res.status(500).json({
                                 sucess: false,
                                 error: true,
@@ -83,7 +85,8 @@ async function RegisterVoice(req, res) {
 
 
 
-                    if (!verificationResult) {
+                    if (!verificationResult && user.voices_array.length === 0) {
+                        console.log(verificationResult)
                         return res.status(500).json({
                             sucess: false,
                             error: true,
@@ -91,7 +94,7 @@ async function RegisterVoice(req, res) {
                         });
                     }
 
-                    if (verificationResult.sucess) {
+                    if (verificationResult && verificationResult.sucess && user.voices_array.length === 0) {
                         // Generate JWT token
 
                         return res.status(401).json({
