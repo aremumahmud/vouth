@@ -24,6 +24,14 @@ async function performVoiceAuthenticate(voice) {
                 userId: response_data.user_id
             };
         }
+
+        if (response_data.confidence && response_data.confidence > 6) {
+            return {
+                message: "Almost a match!, Please enroll a clearer voice and try again",
+                error: true,
+                sucess: false,
+            }
+        }
         return {
             message: "User not found, Please try again",
             error: true,
