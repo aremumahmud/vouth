@@ -3,6 +3,7 @@ const cloudinary = require("../utils/cloudinary");
 const performVoiceEnrollment = require("../utils/enroll_user");
 const transcribe = require("./transcribe");
 const stSimilarity = require("string-similarity");
+const performVoiceAuthenticate = require("../utils/Authenticate_user");
 
 async function RegisterVoice(req, res) {
     //console.log(req.body);
@@ -60,9 +61,51 @@ async function RegisterVoice(req, res) {
                         });
                     }
 
+                    let verificationResult;
+
+                    if (user.voices_array.length === 0) {
+
+                        try {
+                            //Perform voice verification logic (replace with your own logic)
+
+                            verificationResult = await performVoiceAuthenticate(
+                                result.secure_url
+                            );
+                        } catch (err) {
+                            console.log(err, 11);
+                            return res.status(500).json({
+                                sucess: false,
+                                error: true,
+                                message: "Internal Server Error",
+                            });
+                        }
+                    }
+
+
+
+                    if (!verificationResult) {
+                        return res.status(500).json({
+                            sucess: false,
+                            error: true,
+                            message: "Internal Server Error",
+                        });
+                    }
+
+                    if (verificationResult.sucess) {
+                        // Generate JWT token
+
+                        return res.status(401).json({
+                            message: "You cannot register your voice twice, Please login",
+                            error: true,
+                            sucess: false,
+                        });
+                    }
+
+
                     if (user.voices_array.length === 3) {
                         return res.json({ done: true, user })
                     }
+
 
                     user.voices_array.push(result.secure_url)
                     user.voice = result.secure_url;
