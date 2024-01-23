@@ -21,7 +21,8 @@ async function performVoiceAuthenticate(voice) {
             return {
                 error: false,
                 sucess: true,
-                userId: response_data.user_id
+                userId: response_data.user_id,
+                confidence: response_data.confidence
             };
         }
 
