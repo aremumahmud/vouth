@@ -98,7 +98,7 @@ async function RegisterVoice(req, res) {
                         // Generate JWT token
 
                         return res.status(401).json({
-                            message: "You cannot register your voice twice, Please login",
+                            message: "You cannot register your voice twice, Please login" + verificationResult.confidence,
                             error: true,
                             sucess: false,
                         });
