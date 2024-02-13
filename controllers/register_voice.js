@@ -25,24 +25,6 @@ async function RegisterVoice(req, res) {
                         throw error;
                     }
 
-                    if (mobile === 'true') {
-                        let { transcript } = await transcribe(result.secure_url);
-                        let phrase =
-                            "Access Identity Verification Required";
-                        let isSimilar =
-                            stSimilarity.compareTwoStrings(phrase, transcript) >= 0.5;
-
-                        if (!isSimilar) {
-                            return res.status(401).json({
-                                error: true,
-                                sucess: false,
-                                message: `Your provided phrase ('[ ${transcript} ]') doesn't match the expected key phrase. Please double-check and try again.`,
-                            });
-                        }
-                    }
-
-
-
                     let user;
                     try {
                         user = await User.findById(userId);
