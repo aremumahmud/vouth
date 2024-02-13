@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     //if our medium is not mobile we use the transcript as is
-                    if (!isMobile) {
+                    if (false) {
                         let result = areSentencesAlmostSame(key_phrase, transcript);
                         if (result) {
                             //console.log(result);
