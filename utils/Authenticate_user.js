@@ -13,7 +13,7 @@ async function performVoiceAuthenticate(voice) {
 
     try {
         const response = await axios.post(process.env.auth_api, options);
-        // console.log(response.data);
+        console.log(response.data);
         let response_data = response.data
 
         if (response_data.status === 'success') {
