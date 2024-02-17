@@ -1,5 +1,5 @@
 let isMobile = isMobileBrowser();
-let key_phrase = "Whispering winds, dancing leaves, under the Whispering leaves";
+let key_phrase = () => $('keyphase').value
 let $ = (id) => document.getElementById(id);
 let transcript = "";
 let userID = localStorage.getItem("UserID");
@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Start recording when the button is clicked
     startRecordingButton.addEventListener("click", () => {
+
+        if (!$('keyphase').value) return document.getElementById("error").innerHTML = "please choose a keyphrase!";
         //chunks = [];
         navigator.mediaDevices
             .getUserMedia({
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     //if our medium is not mobile we use the transcript as is
                     if (!isMobile) {
-                        let result = areSentencesAlmostSame(key_phrase, transcript);
+                        let result = areSentencesAlmostSame(key_phrase(), transcript);
                         if (result) {
                             //console.log(result);
                             startRecordingButton.style.display = "none";
@@ -134,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 //we only want to record for 7 seconds then stop the recording 
                 $("modal").style.display = "flex";
+                $('phrase').innerHTML = $('keyphase').value
                 setTimeout(() => {
                     stopRecordingButton.click();
                 }, 7000);

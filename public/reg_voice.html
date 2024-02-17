@@ -131,7 +131,7 @@
         <div class="boxen animate__animated animate__heartBeat">
             <p>
                 Say the following key phrase:
-                <b>Whispering winds, dancing leaves, under the Whispering leaves</b>
+                <b id="phrase"></b>
             </p>
             <div class="boxContainer">
                 <div class="box box1"></div>
@@ -160,6 +160,13 @@
                 <p>
                     Kindly take a moment to say the following key phrase that pops up to help us verify your voice.
                 </p>
+                <br>
+                <div class="select">
+                    <p><i>please select a keyphrase that would be easy for you to remeber</i></p>
+                    <select name="" id="keyphase" style="border: 2px solid;">
+                        <option value="">Select a keyphase</option>
+                    </select>
+                </div>
             </div>
             <div style="display: none" class="flex justify-between items-center border rounded-xl p-5">
                 <div>
@@ -195,6 +202,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
     <script src="/js/isMobile.js"></script>
     <script src="/js/similarity.js"></script>
+    <script src="/js/keyphases.js"></script>
     <script src="/js/register_voice.js"></script>
 
 </body>
