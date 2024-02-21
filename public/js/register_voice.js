@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Start recording when the button is clicked
     startRecordingButton.addEventListener("click", () => {
 
-        if (key_phrase) return document.getElementById("error").innerHTML = "please choose a keyphrase!";
+        if (!key_phrase) return document.getElementById("error").innerHTML = "please choose a keyphrase!";
         //chunks = [];
         navigator.mediaDevices
             .getUserMedia({
