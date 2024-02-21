@@ -1,5 +1,5 @@
 let isMobile = isMobileBrowser();
-let key_phrase = () => $('keyphase').value
+let key_phrase = () => "Whispering winds, dancing leaves, under the Whispering leaves"
 let $ = (id) => document.getElementById(id);
 let transcript = "";
 let userID = localStorage.getItem("UserID");
