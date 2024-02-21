@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     if (!isMobile) {
                         let result = areSentencesAlmostSame(key_phrase, transcript);
-                        if (true) {
+                        if (result) {
                             //console.log(result);
                             startRecordingButton.style.display = "none";
                             $("submit").style.display = "flex";

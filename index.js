@@ -53,6 +53,7 @@ app.post('/personal', async(req, res) => {
     // console.log(user , result)
 
     if (!user) {
+        n
         // console.log(user);
         return res.status(401).json({
             error: true,

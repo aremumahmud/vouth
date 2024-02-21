@@ -8,7 +8,7 @@ const performVoiceAuthenticate = require("../utils/Authenticate_user");
 
 async function VerifyVoice(req, res) {
     // console.log(req.body);
-    const { mobile } = req.body;
+    const { mobile, username } = req.body;
 
     try {
         // Upload the file to Cloudinary
@@ -44,15 +44,35 @@ async function VerifyVoice(req, res) {
                         }
                     }
 
+                    let user;
+                    try {
+                        user = await User.findOne({ username });
+                    } catch (e) {
+                        user = null;
+                    }
+
+                    // console.log(user , result)
+
+                    if (!user) {
+                        console.log(user);
+                        return res.status(401).json({
+                            error: true,
+                            sucess: false,
+                            message: "User not Found, You have to register first to register a voice",
+                        });
+                    }
+
 
                     const voiceUrl = result.secure_url;
+                    const voices_array = user.voices_array
 
                     let verificationResult;
                     try {
                         //Perform voice verification logic (replace with your own logic)
 
                         verificationResult = await performVoiceAuthenticate(
-                            voiceUrl
+                            voiceUrl,
+                            voices_array
 
                         );
                     } catch (err) {
