@@ -3,12 +3,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-async function performVoiceAuthenticate(voice) {
+async function performVoiceAuthenticate(voice, compares) {
 
 
     const options = {
 
-        audio_url: voice
+        audio_url: voice,
+        compares
     };
 
     try {
